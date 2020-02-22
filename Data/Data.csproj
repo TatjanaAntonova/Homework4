@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Homework4.Data</AssemblyName>
+    <RootNamespace>Homework4.Data</RootNamespace>
+  </PropertyGroup>
+
+</Project>
