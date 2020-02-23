@@ -1,6 +1,6 @@
 ﻿using Homework4.Data.Common;
 
-namespace Homework4.Domain
+namespace Homework4.Domain.Common
 {
     public abstract class Entity<T> where T: PeriodData
     {
