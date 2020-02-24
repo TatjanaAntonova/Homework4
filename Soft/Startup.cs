@@ -1,3 +1,5 @@
+using Homework4.Domain.Quantity;
+using Homework4.Infra.Quantity;
 using Homework4.Soft.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,8 +26,12 @@ namespace Homework4.Soft
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<QuantityDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IMeasuresRepository, MeasuresRepository>();
             services.AddRazorPages();
         }
 

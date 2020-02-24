@@ -6,6 +6,13 @@ namespace Homework4.Infra.Quantity
 {
     public class MeasuresRepository: IMeasuresRepository
     {
+        private readonly QuantityDbContext db;
+
+        public MeasuresRepository(QuantityDbContext c)
+        {
+            db = c;
+        }
+
         public Task<List<Measure>> Get()
         {
             throw new System.NotImplementedException();
