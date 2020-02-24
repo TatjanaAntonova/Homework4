@@ -8,7 +8,7 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
     public class IndexModel : MeasuresPage
     {
-        internal IndexModel(IMeasuresRepository r) : base(r) { }
+        public IndexModel(IMeasuresRepository r) : base(r) { }
         public async Task OnGetAsync()
         {
             var l = await data.Get();
