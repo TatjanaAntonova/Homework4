@@ -1,24 +1,17 @@
 ﻿using System.Threading.Tasks;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Homework4.Pages.Quantity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
-    public class CreateModel : PageModel
+    public class CreateModel : MeasuresPage
     {
-        private readonly IMeasuresRepository data;
-
-        public CreateModel(IMeasuresRepository r) => data = r;
-        
-
+        public CreateModel(IMeasuresRepository r) : base(r) { }
         public IActionResult OnGet() => Page();
         
-
-        [BindProperty]
-        public MeasureView MeasureView { get; set; }
-
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -29,5 +22,7 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 
             return RedirectToPage("./Index");
         }
+
+        
     }
 }

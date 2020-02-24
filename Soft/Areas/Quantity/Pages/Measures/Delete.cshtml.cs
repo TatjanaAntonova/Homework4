@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Homework4.Facade.Quantity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Homework4.Facade.Quantity;
-using Homework4.Soft.Data;
 
-namespace Homework4.Soft
+namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
     public class DeleteModel : PageModel
     {
