@@ -1,54 +1,31 @@
 ﻿using System.Threading.Tasks;
+using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Homework4.Pages.Quantity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : MeasuresPage
     {
-        private readonly Homework4.Soft.Data.ApplicationDbContext _context;
-
-        public DeleteModel(Homework4.Soft.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        [BindProperty]
-        public MeasureView MeasureView { get; set; }
+        public DeleteModel(IMeasuresRepository r) : base(r) { }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null)  return NotFound();
 
-            MeasureView = await _context.Measures.FirstOrDefaultAsync(m => m.Id == id);
+            Item = MeasureViewFactory.Create(await data.Get(id));
 
-            if (MeasureView == null)
-            {
-                return NotFound();
-            }
+            if (Item == null) return NotFound();
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            MeasureView = await _context.Measures.FindAsync(id);
-
-            if (MeasureView != null)
-            {
-                _context.Measures.Remove(MeasureView);
-                await _context.SaveChangesAsync();
-            }
-
+            if (id == null) return NotFound();
+            await data.Delete(id);
             return RedirectToPage("./Index");
         }
     }

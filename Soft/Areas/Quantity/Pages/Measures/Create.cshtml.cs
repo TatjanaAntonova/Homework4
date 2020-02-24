@@ -3,7 +3,6 @@ using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 using Homework4.Pages.Quantity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
@@ -18,7 +17,7 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
         {
             if (!ModelState.IsValid) return Page();
 
-            await data.Add(MeasureViewFactory.Create(MeasureView));
+            await data.Add(MeasureViewFactory.Create(Item));
 
             return RedirectToPage("./Index");
         }

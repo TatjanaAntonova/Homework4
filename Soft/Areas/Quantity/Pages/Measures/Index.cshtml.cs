@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
-using Homework4.Soft.Data;
+using Homework4.Pages.Quantity;
 
-namespace Homework4.Soft
+namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
-    public class IndexModel : PageModel
+    public class IndexModel : MeasuresPage
     {
-        private readonly Homework4.Soft.Data.ApplicationDbContext _context;
-
-        public IndexModel(Homework4.Soft.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public IList<MeasureView> MeasureView { get;set; }
-
+        internal IndexModel(IMeasuresRepository r) : base(r) { }
         public async Task OnGetAsync()
         {
-            MeasureView = await _context.Measures.ToListAsync();
+            var l = await data.Get();
+            Items = new List<MeasureView>();
+
+            foreach (var e in l) { Items.Add(MeasureViewFactory.Create(e)); }
         }
     }
 }
