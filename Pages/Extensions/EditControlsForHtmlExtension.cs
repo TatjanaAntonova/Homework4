@@ -11,7 +11,15 @@ namespace Homework4.Pages.Extensions
         public static IHtmlContent EditControlsFor<TClassType, TPropertyType>
             (this IHtmlHelper<TClassType> htmlHelper, Expression<Func<TClassType, TPropertyType>> expression)
         {
-            var htmlStrings = new List<object>
+            var s = htmlString(htmlHelper, expression);  
+
+            return new HtmlContentBuilder(s);
+        }
+
+        internal static List<object> htmlString<TClassType, TPropertyType>(
+            IHtmlHelper<TClassType> htmlHelper, Expression<Func<TClassType, TPropertyType>> expression)
+        {
+            return new List<object>
             {
                 new HtmlString("<div class = \"form-group\">"),
                 htmlHelper.LabelFor(expression, new {@class = "text-dark"}),
@@ -19,8 +27,6 @@ namespace Homework4.Pages.Extensions
                 htmlHelper.ValidationMessageFor(expression, "", new {@class = "text-danger"}),
                 new HtmlString("</div>")
             };
-
-            return new HtmlContentBuilder(htmlStrings);
         }
     }
 }
