@@ -8,7 +8,7 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
     public class DetailsModel : MeasuresPage
     {
-        internal DetailsModel(IMeasuresRepository r) : base(r) { }
+        public DetailsModel(IMeasuresRepository r) : base(r) { }
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null) return NotFound();
