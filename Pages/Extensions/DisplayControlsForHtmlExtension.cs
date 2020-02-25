@@ -25,7 +25,7 @@ namespace Homework4.Pages.Extensions
                 htmlHelper.DisplayNameFor(expression),
                 new HtmlString("</dt>"),
                 new HtmlString("<dd class =\"col-sm-10\">"),
-                htmlHelper.DisplayNameFor(expression),
+                htmlHelper.DisplayFor(expression),
                 new HtmlString("</dd>")
             };
         }
