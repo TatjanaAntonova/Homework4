@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Homework4.Infra.Quantity
     {
         private readonly QuantityDbContext db;
         public string SortOrder { get; set; }
+        public string SearchString { get; set; }
 
         public MeasuresRepository(QuantityDbContext c)
         {
@@ -21,10 +23,21 @@ namespace Homework4.Infra.Quantity
 
         public async Task<List<Measure>> Get()
         {
-            var l =  await createSorted().ToListAsync();
+            var l =  await createFiltered(createSorted()).ToListAsync();
 
             return l.Select(e => new Measure(e)).ToList();
 
+        }
+
+        private IQueryable<MeasureData> createFiltered(IQueryable<MeasureData> set)
+        {
+            if (string.IsNullOrEmpty(SearchString)) return set;
+            return set.Where(s => s.Name.Contains(SearchString)
+                                  || s.Code.Contains(SearchString)
+                                  || s.Id.Contains(SearchString)
+                                  || s.Definition.Contains(SearchString)
+                                  || s.ValidFrom.ToString().Contains(SearchString)
+                                  || s.ValidTo.ToString().Contains(SearchString));
         }
 
         private IQueryable<MeasureData> createSorted()
@@ -99,10 +112,5 @@ namespace Homework4.Infra.Quantity
             }
         //}
         }
-
-        //Task IRepository<Measure>.Delete(string id)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
     }
 }

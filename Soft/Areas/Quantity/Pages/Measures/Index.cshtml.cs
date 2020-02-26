@@ -9,12 +9,15 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
     public class IndexModel : MeasuresPage
     {
+        public string SearchString;
         public IndexModel(IMeasuresRepository r) : base(r) { }
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
             data.SortOrder = sortOrder;
+            SearchString = searchString;
+            data.SearchString = SearchString;
             var l = await data.Get();
             Items = new List<MeasureView>();
 
