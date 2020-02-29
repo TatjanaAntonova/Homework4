@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Homework4.Data.Quantity;
-using Homework4.Domain.Common;
 using Homework4.Domain.Quantity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +12,10 @@ namespace Homework4.Infra.Quantity
         private readonly QuantityDbContext db;
         public string SortOrder { get; set; }
         public string SearchString { get; set; }
+        public int PageSize { get; set; } = 1;
+        public int PageIndex { get; set; } = 1;
+        public bool HasNextPage { get; set; }
+        public bool HasPreviousPage { get; set; }
 
         public MeasuresRepository(QuantityDbContext c)
         {
@@ -23,10 +24,16 @@ namespace Homework4.Infra.Quantity
 
         public async Task<List<Measure>> Get()
         {
-            var l =  await createFiltered(createSorted()).ToListAsync();
-
+            var l =  await createPaged(createFiltered(createSorted()));
+            HasNextPage = l.HasNextPage;
+            HasPreviousPage = l.HasPreviousPage;
             return l.Select(e => new Measure(e)).ToList();
+        }
 
+        private async Task<PaginatedList<MeasureData>> createPaged(IQueryable<MeasureData> dataSet)
+        {
+            return await PaginatedList<MeasureData>.CreateAsync(
+                dataSet, PageIndex, PageSize);
         }
 
         private IQueryable<MeasureData> createFiltered(IQueryable<MeasureData> set)
@@ -59,7 +66,6 @@ namespace Homework4.Infra.Quantity
                     measures = measures.OrderBy(s => s.Name);
                     break;
             }
-
             return measures.AsNoTracking();
         }
 
