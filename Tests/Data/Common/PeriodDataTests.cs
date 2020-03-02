@@ -1,5 +1,3 @@
-using System;
-using System.Security.Cryptography.X509Certificates;
 using Homework4.Data.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

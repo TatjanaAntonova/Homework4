@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 using Microsoft.AspNetCore.Mvc;

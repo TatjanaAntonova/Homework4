@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Homework4.Data.Quantity;
-using Homework4.Domain.Quantity;
 
 namespace Homework4.Infra.Quantity
 {
