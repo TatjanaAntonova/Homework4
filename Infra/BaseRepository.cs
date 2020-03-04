@@ -29,11 +29,15 @@ namespace Homework4.Infra
         public async Task<TDomain> Get(string id)
         {
             if (id is null) return new TDomain();
-            var d = await dbSet.FirstOrDefaultAsync(m => isThisRecord(m, id));
+            var d = await getData(id);
+
             var obj = new TDomain {Data = d};
 
             return obj;
         }
+
+        protected abstract Task<TData> getData(string id);
+        
 
         protected virtual bool isThisRecord(TData d, string id)
         {
