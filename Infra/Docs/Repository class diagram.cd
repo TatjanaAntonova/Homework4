@@ -3,39 +3,39 @@
   <Class Name="Homework4.Infra.Quantity.MeasuresRepository">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYAAAAAAQAQAABAAAAAAIAAAAEAAAAAAAAAEAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAABAAAAAAIAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Quantity\MeasuresRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Homework4.Infra.BaseRepository&lt;T&gt;">
+  <Class Name="Homework4.Infra.BaseRepository&lt;TDomain, TData&gt;">
     <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYAAAAAAAAAAABAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAYAAAAAAAAQAABAAAAAAAAAAAEAAAAACAAAAAAAAAA=</HashCode>
       <FileName>BaseRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Homework4.Infra.SortedRepository&lt;T&gt;">
-    <Position X="6.25" Y="3" Width="1.5" />
+  <Class Name="Homework4.Infra.SortedRepository&lt;TDomain, TData&gt;">
+    <Position X="6.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SortedRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Homework4.Infra.FilteredRepository&lt;T&gt;">
-    <Position X="3.25" Y="3" Width="1.5" />
+  <Class Name="Homework4.Infra.FilteredRepository&lt;TDomain, TData&gt;">
+    <Position X="3" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>FilteredRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Homework4.Infra.PaginatedRepository&lt;T&gt;">
+  <Class Name="Homework4.Infra.PaginatedRepository&lt;TDomain, TData&gt;">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAUAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>PaginatedRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
