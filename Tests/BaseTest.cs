@@ -2,7 +2,7 @@ using System;
 using Homework4.Aids;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Tests
+namespace Homework4.Tests
 {
     public abstract class BaseTest<TClass, TBaseClass>
     {

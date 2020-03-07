@@ -2,7 +2,7 @@
 using Homework4.Data.Quantity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Tests.Data.Quantity
+namespace Homework4.Tests.Data.Quantity
 {
     [TestClass]
     public class UnitDataTests: SealedClassTest<UnitData, DefinedEntityData>
