@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 using Homework4.Aids;
 using Homework4.Data.Quantity;
@@ -36,13 +38,14 @@ namespace Homework4.Tests.Infra
         [TestMethod]
         public void SortOrderTest()
         {
-            Assert.Inconclusive();
+            isNullableProperty(() => obj.SortOrder, x => obj.SortOrder = x);
         }
 
         [TestMethod]
         public void DescendingStringTest()
         {
-            Assert.Inconclusive();
+            var propertyName = GetMember.Name<testClass>(x => x.DescendingString);
+            isReadOnlyProperty(obj, propertyName, "_desc");
         }
 
         [TestMethod]
@@ -60,19 +63,57 @@ namespace Homework4.Tests.Infra
         [TestMethod]
         public void LambdaExpressionTest()
         {
-            Assert.Inconclusive();
+            var name = GetMember.Name<MeasureData>(x => x.ValidFrom);
+            var property = typeof(MeasureData).GetProperty(name);
+            var lambda = obj.lambdaExpression(property);
+            Assert.IsNotNull(lambda);
+            Assert.IsInstanceOfType(lambda, typeof(Expression<Func<MeasureData, object>>));
+            Assert.IsTrue(lambda.ToString().Contains(name));
         }
 
         [TestMethod]
-        public void FindProperty()
+        public void FindPropertyTest()
         {
-            Assert.Inconclusive();
+            string s;
+
+            void test(PropertyInfo expected, string sortOrder)
+            {
+                obj.SortOrder = sortOrder;
+                Assert.AreEqual(expected, obj.findProperty());
+            }
+
+            test(null, GetRandom.String());
+            test(null, null);
+            test(null, string.Empty);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Name)), s);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.ValidFrom)), s);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.ValidTo)), s);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Definition)), s);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Code)), s);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Id)), s);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Name)), s + obj.DescendingString);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.ValidFrom)), s + obj.DescendingString);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.ValidTo)), s + obj.DescendingString);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Definition)), s + obj.DescendingString);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Code)), s + obj.DescendingString);
+            test(typeof(MeasureData).GetProperty(s = GetMember.Name<MeasureData>(x => x.Id)), s + obj.DescendingString);
         }
 
         [TestMethod]
         public void GetName()
         {
-            Assert.Inconclusive();
+            string s;
+
+            void test(string expected, string sortOrder)
+            {
+                obj.SortOrder = sortOrder;
+                Assert.AreEqual(expected, obj.getName());
+            }
+
+            test(s = GetRandom.String(), s);
+            test(s = GetRandom.String(), s + obj.DescendingString);
+            test(string.Empty, string.Empty);
+            test(string.Empty, null);
         }
         
         [TestMethod]
@@ -84,10 +125,16 @@ namespace Homework4.Tests.Infra
         [TestMethod]
         public void IsDescendingTest()
         {
-            obj.SortOrder = GetRandom.String();
-            Assert.IsFalse(obj.isDescending());
-            obj.SortOrder += obj.DescendingString;
-            Assert.IsTrue(obj.isDescending());
+            void test(string sortOrder, bool expected)
+            {
+                obj.SortOrder = sortOrder;
+                Assert.AreEqual(expected,obj.isDescending());
+            }
+
+            test(GetRandom.String(), false);
+            test(GetRandom.String() + obj.DescendingString, true);  
+            test(string.Empty, false);
+            test(null, false);
         }
     }
 }
