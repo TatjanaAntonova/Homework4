@@ -64,7 +64,12 @@ namespace Homework4.Infra
         }
 
         internal IQueryable<TData> setOrderBy(IQueryable<TData> data, Expression<Func<TData, object>> e)
-         => isDescending() ? data.OrderByDescending(e) : data.OrderBy(e);
+        {
+            if (data is null) return null;
+            if (e is null) return data;
+            try { return isDescending() ? data.OrderByDescending(e) : data.OrderBy(e); }
+            catch { return data; }
+        }
         
         internal bool isDescending() => !string.IsNullOrEmpty(SortOrder) && SortOrder.EndsWith(DescendingString);
     }
