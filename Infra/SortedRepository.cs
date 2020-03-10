@@ -30,8 +30,8 @@ namespace Homework4.Infra
         protected internal IQueryable<TData> setSorting(IQueryable<TData> data)
         {
             var expression = createExpression();
-            if (expression is null) return data;
-            return setOrderBy(data, expression);
+            var r = expression is null ? data: setOrderBy(data, expression);
+            return r;
         }
 
         internal Expression<Func<TData, object>> createExpression()
