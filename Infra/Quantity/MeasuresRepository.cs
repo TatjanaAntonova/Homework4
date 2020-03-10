@@ -20,6 +20,8 @@ namespace Homework4.Infra.Quantity
             return l.Select(e => new Measure(e)).ToList();
         }
 
+        protected internal override Measure toDomainObject(MeasureData d) => new Measure(d);
+
         private async Task<PaginatedList<MeasureData>> createPaged(IQueryable<MeasureData> dataSet)
         {
             return await PaginatedList<MeasureData>.CreateAsync(
