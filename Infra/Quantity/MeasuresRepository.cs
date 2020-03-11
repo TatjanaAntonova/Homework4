@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Homework4.Infra.Quantity
 {

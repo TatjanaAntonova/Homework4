@@ -12,9 +12,6 @@ namespace Homework4.Infra
     {
         public int PageIndex { get; set; }
         public int TotalPages => getTotalPages(PageSize);
-
-
-
         public bool HasNextPage => PageIndex < TotalPages;
         public bool HasPreviousPage => PageIndex > 1;
         public int PageSize { get; set; } = 5;
@@ -28,31 +25,14 @@ namespace Homework4.Infra
             return pages;
         }
 
-        internal int countTotalPages(int count, in int pageSize)
-        {
-            return (int)Math.Ceiling(count / (double)pageSize);
-        }
+        internal int countTotalPages(int count, in int pageSize) => (int)Math.Ceiling(count / (double)pageSize);
 
-        private int getItemsCount()
-        {
-            var query = base.createSqlQuery();
+        private int getItemsCount() => base.createSqlQuery().CountAsync().Result;
 
-            return query.CountAsync().Result;
-        }
+        protected internal override IQueryable<TData> createSqlQuery()=> addSkipAndTake(base.createSqlQuery());
 
-        protected internal override IQueryable<TData> createSqlQuery()
-        {
-            var query = base.createSqlQuery();
-            query = addSkipAndTake(query);
-            return query;
-        }
-
-        private IQueryable<TData> addSkipAndTake(IQueryable<TData> query)
-        {
-            var q = query.Skip(
-                    (PageIndex - 1) * PageSize)
-                .Take(PageSize);
-            return q;
-        }
+        private IQueryable<TData> addSkipAndTake(IQueryable<TData> query) => query
+            .Skip((PageIndex - 1) * PageSize)
+            .Take(PageSize);
     }
 }
