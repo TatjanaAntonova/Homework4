@@ -11,24 +11,9 @@ namespace Homework4.Infra.Quantity
     {
         public MeasuresRepository(QuantityDbContext c) : base(c, c.Measures) { }
 
-
-        public override async Task<List<Measure>> Get()
-        {
-            var l = await createPaged(createFiltered(createSorted()));
-            HasNextPage = l.HasNextPage;
-            HasPreviousPage = l.HasPreviousPage;
-            return l.Select(e => new Measure(e)).ToList();
-        }
-
         protected internal override Measure toDomainObject(MeasureData d) => new Measure(d);
 
-        private async Task<PaginatedList<MeasureData>> createPaged(IQueryable<MeasureData> dataSet)
-        {
-            return await PaginatedList<MeasureData>.CreateAsync(
-                dataSet, PageIndex, PageSize);
-        }
-
-        private IQueryable<MeasureData> createFiltered(IQueryable<MeasureData> set)
+       protected internal override IQueryable<MeasureData> addFiltering (IQueryable<MeasureData> set)
         {
             if (string.IsNullOrEmpty(SearchString)) return set;
             return set.Where(s => s.Name.Contains(SearchString)
@@ -37,14 +22,6 @@ namespace Homework4.Infra.Quantity
                                   || s.Definition.Contains(SearchString)
                                   || s.ValidFrom.ToString().Contains(SearchString)
                                   || s.ValidTo.ToString().Contains(SearchString));
-        }
-
-        private IQueryable<MeasureData> createSorted()
-        {
-            IQueryable<MeasureData> measures = from s in dbSet select s;
-
-            measures = setSorting(measures);
-            return measures.AsNoTracking();
         }
     }
 }
