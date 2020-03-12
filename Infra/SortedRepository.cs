@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Homework4.Data.Common;
 using Homework4.Domain.Common;
 using Microsoft.EntityFrameworkCore;
@@ -45,13 +44,12 @@ namespace Homework4.Infra
         internal Expression<Func<TData, object>> createExpression()
         {
             var property = findProperty();
-            if (property is null) return null;
-            return lambdaExpression(property);
+            return property is null ? null: lambdaExpression(property);
         }
 
         internal Expression<Func<TData, object>> lambdaExpression(PropertyInfo p)
         {
-            var param = Expression.Parameter(typeof(TData));
+            var param = Expression.Parameter(typeof(TData), "x");
             var property = Expression.Property(param, p);
             var body = Expression.Convert(property, typeof(object));
             return Expression.Lambda<Func<TData, object>>(body, param);
@@ -67,8 +65,7 @@ namespace Homework4.Infra
         {
             if (string.IsNullOrEmpty(SortOrder)) return string.Empty;
             var idx = SortOrder.IndexOf(DescendingString, StringComparison.Ordinal);
-            if (idx >0 ) return SortOrder.Remove(idx);
-            return SortOrder;
+            return idx >= 0 ? SortOrder.Remove(idx): SortOrder;
         }
 
         internal IQueryable<TData> addOrderBy(IQueryable<TData> query, Expression<Func<TData, object>> e)
