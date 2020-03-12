@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using Homework4.Data.Common;
 using Homework4.Domain.Common;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +22,37 @@ namespace Homework4.Infra
             return query;
         }
 
-        protected internal virtual IQueryable<TData> addFiltering(IQueryable<TData> query)
+        internal  IQueryable<TData> addFiltering(IQueryable<TData> query)
         {
-            return query;
+            if (string.IsNullOrEmpty(SearchString)) return query;
+
+            //s => s.Name.Contains(SearchString)
+            //                      || s.Code.Contains(SearchString)
+            //                      || s.Id.Contains(SearchString)
+            //                      || s.Definition.Contains(SearchString)
+            //                      || s.ValidFrom.ToString().Contains(SearchString)
+            //                      || s.ValidTo.ToString().Contains(SearchString));
+
+            var expression = createWhereExpression();
+            return query.Where(expression);
+        }
+
+        internal Expression<Func<TData, bool>> createWhereExpression()
+        {
+            var param = Expression.Parameter(typeof(TData), "s");
+
+            Expression predicate = null;
+
+            foreach (var p in typeof(TData).GetProperties())
+            {
+                Expression body = Expression.Property(param, p);
+                if (p.PropertyType != typeof(string))
+                    body = Expression.Call(body, "ToString", null);
+                body = Expression.Call(body, "Contains", null, Expression.Constant(SearchString));
+                predicate = predicate is null ? body : Expression.Or(predicate, body);
+            }
+
+            return predicate is null ? null : Expression.Lambda<Func<TData, bool>>(predicate, param);
         }
     }
 }
