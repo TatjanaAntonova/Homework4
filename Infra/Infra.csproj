@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>Homework4.Infra</AssemblyName>
     <RootNamespace>Homework4.Infra</RootNamespace>
   </PropertyGroup>
