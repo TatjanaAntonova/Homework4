@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,5 +28,41 @@ namespace Homework4.Pages.Quantity
         public string CurrentFilter { get; set; } = "Current filter";
         public int PageIndex { get; set; } = 3;
         public int TotalPages { get; set; } = 10;
+
+        protected internal async Task<bool> addObject()
+        {            
+            // TODO see viga tuleb lahendada
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+            // more details see https://aka.ms/RazorPagesCRUD.
+            try
+            {
+                if (!ModelState.IsValid) return false;
+                await data.Add(MeasureViewFactory.Create(Item));
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        protected internal async Task updateObject()
+        {
+            // TODO see viga tuleb lahendada
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+            // more details see https://aka.ms/RazorPagesCRUD.
+            await data.Update(MeasureViewFactory.Create(Item));
+        }
+
+        protected internal async Task getObject(string id)
+        {
+            var o = await data.Get(id);
+            Item = MeasureViewFactory.Create(o);
+        }
+
+        protected internal async Task deleteObject(string id)
+        {
+            await data.Delete(id);
+        }
     }
 }

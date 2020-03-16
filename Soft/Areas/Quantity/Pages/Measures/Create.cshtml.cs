@@ -3,6 +3,7 @@ using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 using Homework4.Pages.Quantity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 {
@@ -11,17 +12,10 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
         public CreateModel(IMeasuresRepository r) : base(r) { }
         public IActionResult OnGet() => Page();
         
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) return Page();
-
-            await data.Add(MeasureViewFactory.Create(Item));
-
+            if (!await addObject()) return Page();
             return RedirectToPage("./Index");
         }
-
-        
     }
 }

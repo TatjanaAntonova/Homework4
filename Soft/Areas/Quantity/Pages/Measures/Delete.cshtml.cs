@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Homework4.Domain.Quantity;
-using Homework4.Facade.Quantity;
 using Homework4.Pages.Quantity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,19 +12,13 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Measures
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)  return NotFound();
-
-            Item = MeasureViewFactory.Create(await data.Get(id));
-
-            if (Item == null) return NotFound();
-
+            await getObject(id);
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            if (id == null) return NotFound();
-            await data.Delete(id);
+            await deleteObject(id);
             return RedirectToPage("./Index");
         }
     }
