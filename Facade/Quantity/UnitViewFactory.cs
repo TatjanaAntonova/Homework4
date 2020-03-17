@@ -1,30 +1,30 @@
-﻿using Homework4.Data.Quantity;
-using Homework4.Domain.Quantity;
+﻿using Homework4.Domain.Quantity;
 
 namespace Homework4.Facade.Quantity
 {
-    public static class MeasureViewFactory
+    public static class UnitViewFactory
     {
-        public static Measure Create(MeasureView v)
+        public static Unit Create(UnitView v)
         {
-            var o = new Measure
+            var o = new Unit
             {
                 Data =
                 {
                     Id = v.Id,
-                    Code = v.Code,
                     Name = v.Name,
+                    Code = v.Code,
                     Definition = v.Definition,
                     ValidFrom = v.ValidFrom,
                     ValidTo = v.ValidTo
                 }
             };
+
             return o;
         }
 
-        public static MeasureView Create(Measure o)
+        public static UnitView Create(Unit o)
         {
-            var v = new MeasureView
+            var v = new UnitView
             {
                 Id = o.Data.Id,
                 Name = o.Data.Name,
@@ -33,7 +33,8 @@ namespace Homework4.Facade.Quantity
                 ValidFrom = o.Data.ValidFrom,
                 ValidTo = o.Data.ValidTo
             };
-           return v;
+            return v;
         }
     }
 }
+
