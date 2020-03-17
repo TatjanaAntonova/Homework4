@@ -1,16 +1,17 @@
 ﻿@page
 @using Homework4.Pages.Extensions
-@model Homework4.Soft.Areas.Quantity.Pages.Measures.EditModel
+@model Homework4.Soft.Areas.Quantity.Pages.Units.EditModel
 
 @{
     Layout = "_Edit";
 }
 
-<body>
-    <input type ="hidden" asp-for =" Item.Id" />
-    @Html.EditControlsFor(model => model.Item.Code)
-    @Html.EditControlsFor(model => model.Item.Name)
-    @Html.EditControlsFor(model => model.Item.Definition)
-    @Html.EditControlsFor(model => model.Item.ValidFrom)
-    @Html.EditControlsFor(model => model.Item.ValidTo)
-</body>
+    <body>
+        <input type="hidden" asp-for=" Item.Id" />
+        @Html.EditControlsFor(model => model.Item.Code)
+        @Html.EditControlsFor(model => model.Item.MeasureId)
+        @Html.EditControlsFor(model => model.Item.Name)
+        @Html.EditControlsFor(model => model.Item.Definition)
+        @Html.EditControlsFor(model => model.Item.ValidFrom)
+        @Html.EditControlsFor(model => model.Item.ValidTo)
+    </body>

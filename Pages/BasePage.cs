@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Homework4.Pages
 {
-    public abstract class BasePage<TRepository, TDomain, TView>: PageModel
+    public abstract class BasePage<TRepository, TDomain, TView, TData>: PageModel
     where TRepository: ICrudMethods<TDomain>, ISorting, ISearching, IPaging
     {
         private TRepository db;
@@ -83,7 +83,7 @@ namespace Homework4.Pages
         {
             await db.Delete(id);
         }
-        public string GetSortString(Expression<Func<MeasureData, object>> e, string page)
+        public string GetSortString(Expression<Func<TData, object>> e, string page)
         {
             var name = GetMember.Name(e);
             string sortOrder;

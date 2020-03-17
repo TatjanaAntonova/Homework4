@@ -1,12 +1,13 @@
 ﻿@page
 @using Homework4.Pages.Extensions
-@model Homework4.Soft.Areas.Quantity.Pages.Measures.DeleteModel
+@model Homework4.Soft.Areas.Quantity.Pages.Units.DeleteModel
 
 @{
     Layout = "_Delete";
 }
 
 <body>
+    @Html.DisplayControlsFor(model => model.Item.MeasureId)
     @Html.DisplayControlsFor(model => model.Item.Code)
     @Html.DisplayControlsFor(model => model.Item.Name)
     @Html.DisplayControlsFor(model => model.Item.Definition)

@@ -1,10 +1,11 @@
-﻿using Homework4.Domain.Quantity;
+﻿using Homework4.Data.Quantity;
+using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Homework4.Pages.Quantity
 {
-    public class MeasuresPage : BasePage<IMeasuresRepository, Measure, MeasureView>
+    public class MeasuresPage : BasePage<IMeasuresRepository, Measure, MeasureView, MeasureData>
     {
         protected internal MeasuresPage(IMeasuresRepository r): base(r)
         {

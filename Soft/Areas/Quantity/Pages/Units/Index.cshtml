@@ -3,11 +3,11 @@
 @using Homework4.Aids
 @using Homework4.Data.Quantity
 @using Homework4.Pages.Extensions
-@model Homework4.Soft.Areas.Quantity.Pages.Measures.IndexModel
+@model Homework4.Soft.Areas.Quantity.Pages.Units.IndexModel
 
 @{
     Layout = "_Index";
-    var page = "/Quantity/Measures"; 
+    var page = "/Quantity/Units"; 
 }
 
 @section Create
@@ -20,6 +20,7 @@
         <thead>
             @Html.TableHeaderFor(
                 new Link(Html.DisplayNameFor(m => m.Item.Id), Model.GetSortString(m => m.Id, page)),
+                new Link(Html.DisplayNameFor(m => m.Item.MeasureId), Model.GetSortString(m => m.MeasureId, page)),
                 new Link(Html.DisplayNameFor(m => m.Item.Name), Model.GetSortString(m => m.Name, page)),
                 new Link(Html.DisplayNameFor(m => m.Item.Code), Model.GetSortString(m => m.Code, page)),
                 new Link(Html.DisplayNameFor(m => m.Item.Definition), Model.GetSortString(m => m.Definition, page)),
@@ -35,6 +36,7 @@
                         page,
                         item.Id,
                         Html.DisplayFor(modelItem => item.Id),
+                        Html.DisplayFor(modelItem => item.MeasureId),
                         Html.DisplayFor(modelItem => item.Name),
                         Html.DisplayFor(modelItem => item.Code),
                         Html.DisplayFor(modelItem => item.Definition),

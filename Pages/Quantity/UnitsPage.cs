@@ -1,9 +1,10 @@
-﻿using Homework4.Domain.Quantity;
+﻿using Homework4.Data.Quantity;
+using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 
 namespace Homework4.Pages.Quantity
 {
-    public class UnitsPage : BasePage<IUnitsRepository, Unit, UnitView>
+    public class UnitsPage : BasePage<IUnitsRepository, Unit, UnitView, UnitData>
     {
         protected internal UnitsPage(IUnitsRepository r) : base(r)
         {

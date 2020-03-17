@@ -4,10 +4,10 @@ using Homework4.Facade.Common;
 
 namespace Homework4.Facade.Quantity
 {
-    public class UnitView: DefinedView
+    public sealed class UnitView: DefinedView
     {
         [Required]
         [DisplayName("Measure")]
-        public string MeasureID { get; set; }
+        public string MeasureId { get; set; }
     }
 }
