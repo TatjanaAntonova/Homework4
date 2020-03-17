@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Homework4.Tests.Infra
 {
     [TestClass]
-    public class SortedRepositoryTests: AbstractClassTest<SortedRepository<Measure, MeasureData>, BaseRepository<Measure, MeasureData>>
+    public class SortedRepositoryTests: AbstractClassTests<SortedRepository<Measure, MeasureData>, BaseRepository<Measure, MeasureData>>
     {
         private class testClass : SortedRepository<Measure, MeasureData>
         {
@@ -60,13 +60,15 @@ namespace Homework4.Tests.Infra
                 var set = obj.addSorting(d);
                 Assert.IsNotNull(set);
                 Assert.AreNotEqual(d, set);
-                Assert.IsTrue(set.Expression.ToString()
-                    .Contains($"Homework4.Data.Quantity.MeasureData]).OrderByDescending(Param_0 => Convert(Param_0.{sortOrder}, Object)"));
+                var str = set.Expression.ToString();
+                Assert.IsTrue(str
+                    .Contains($"Homework4.Data.Quantity.MeasureData]).OrderByDescending(x => Convert(x.{sortOrder}, Object)"));
                 obj.SortOrder = sortOrder;
                 set = obj.addSorting(d);
                 Assert.IsNotNull(set);
                 Assert.AreNotEqual(d, set);
-                Assert.IsTrue(set.Expression.ToString().Contains($"Homework4.Data.Quantity.MeasureData]).OrderBy(Param_0 => Convert(Param_0.{sortOrder}, Object)"));
+                str = set.Expression.ToString();
+                Assert.IsTrue(str.Contains($"Homework4.Data.Quantity.MeasureData]).OrderBy(x => Convert(x.{sortOrder}, Object)"));
             }
 
             Assert.IsNull(obj.addSorting(null));

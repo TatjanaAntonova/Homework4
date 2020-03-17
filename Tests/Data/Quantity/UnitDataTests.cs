@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Homework4.Tests.Data.Quantity
 {
     [TestClass]
-    public class UnitDataTests: SealedClassTest<UnitData, DefinedEntityData>
+    public class UnitDataTests: SealedClassTests<UnitData, DefinedEntityData>
     {
         [TestMethod]
         public void MeasureIdTest()

@@ -1,11 +1,11 @@
-using Homework4.Data.Common;
+using Homework4.Facade.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Homework4.Tests.Data.Common
+namespace Homework4.Tests.Facade.Common
 {
     [TestClass]
-    public class UniqueEntityDataTests : AbstractClassTests<UniqueEntityData, PeriodData> {
-        private class testClass : UniqueEntityData { }
+    public class UniqueEntityViewTests : AbstractClassTests<UniqueEntityView, PeriodView> {
+        private class testClass : UniqueEntityView { }
 
         [TestInitialize]
         public override void TestInitialize()

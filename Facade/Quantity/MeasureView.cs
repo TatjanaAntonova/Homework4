@@ -2,5 +2,5 @@
 
 namespace Homework4.Facade.Quantity
 {
-    public class MeasureView: DefinedView { }
+    public sealed class MeasureView: DefinedView { }
 }

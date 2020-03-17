@@ -11,6 +11,7 @@ namespace Homework4.Facade.Quantity
                 Data =
                 {
                     Id = v.Id,
+                    MeasureId = v.MeasureId,
                     Name = v.Name,
                     Code = v.Code,
                     Definition = v.Definition,
@@ -27,6 +28,7 @@ namespace Homework4.Facade.Quantity
             var v = new UnitView
             {
                 Id = o.Data.Id,
+                MeasureId = o.Data.MeasureId,
                 Name = o.Data.Name,
                 Code = o.Data.Code,
                 Definition = o.Data.Definition,
