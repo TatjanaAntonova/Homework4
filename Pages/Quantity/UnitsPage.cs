@@ -1,15 +1,31 @@
-﻿using Homework4.Data.Quantity;
+﻿using System.Collections.Generic;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homework4.Pages.Quantity
 {
     public class UnitsPage : BasePage<IUnitsRepository, Unit, UnitView, UnitData>
     {
-        protected internal UnitsPage(IUnitsRepository r) : base(r)
+        protected internal UnitsPage(IUnitsRepository r, IMeasuresRepository m) : base(r)
         {
             PageTitle = "Units";
+            Measures = createMeasures(m);
         }
+
+        private static IEnumerable<SelectListItem> createMeasures(IMeasuresRepository r)
+        {
+            var list = new List<SelectListItem>();
+            var measures = r.Get().GetAwaiter().GetResult();
+            foreach (var m in measures)
+            {
+                list.Add(new SelectListItem(m.Data.Name, m.Data.Id));
+            }
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> Measures { get; }
 
         public override string ItemId => Item.Id;
 
