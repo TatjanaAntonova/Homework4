@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
@@ -37,6 +38,14 @@ namespace Homework4.Pages.Quantity
         protected internal override UnitView toView(Unit obj)
         {
             return UnitViewFactory.Create(obj);
+        }
+
+        public string GetMeasureName(string measureId)
+        {
+            foreach (var m in Measures)
+                if (m.Value == measureId)
+                    return m.Text;
+            return "Unspecified";
         }
     }
 }

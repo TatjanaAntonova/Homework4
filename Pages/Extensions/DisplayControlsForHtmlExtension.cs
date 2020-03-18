@@ -16,6 +16,14 @@ namespace Homework4.Pages.Extensions
             return new HtmlContentBuilder(s);
         }
 
+        public static IHtmlContent DisplayControlsFor<TModel, TResult>(this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TResult>> expression, string value)
+        {
+            var s = htmlString(htmlHelper, expression, value);
+
+            return new HtmlContentBuilder(s);
+        }
+
         internal static List<object> htmlString<TModel, TResult>(
             IHtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TResult>> expression)
         {
@@ -26,6 +34,19 @@ namespace Homework4.Pages.Extensions
                 new HtmlString("</dt>"),
                 new HtmlString("<dd class =\"col-sm-10\">"),
                 htmlHelper.DisplayFor(expression),
+                new HtmlString("</dd>")
+            };
+        }
+
+         private static List<object> htmlString<TModel, TResult>(IHtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TResult>> expression, string value)
+        {
+            return new List<Object>
+            {
+                new HtmlString("<dt class=\"col-sm-2\">"),
+                htmlHelper.DisplayNameFor(expression),
+                new HtmlString("</dt>"),
+                new HtmlString("<dd class =\"col-sm-10\">"),
+                htmlHelper.Raw(value),
                 new HtmlString("</dd>")
             };
         }
