@@ -12,9 +12,8 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Units
 
         public async Task<IActionResult> OnGetAsync(string id, string fixedFilter, string fixedValue)
         {
-            FixedFilter = fixedFilter;
-            FixedValue = fixedValue;
-            await getObject(id);
+           
+            await getObject(id, fixedFilter, fixedValue);
             return Page();
         }
 
@@ -22,8 +21,8 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Units
         {
             FixedFilter = fixedFilter;
             FixedValue = fixedValue;
-            await deleteObject(id);
-            return Redirect(url: $"/Quantity/Units/Index?fixedFilter={FixedFilter}&fixedValue={FixedValue}");
+            await deleteObject(id, fixedFilter, fixedValue);
+            return Redirect(IndexUrl);
         }
     }
 }
