@@ -27,7 +27,7 @@ namespace Homework4.Pages
 
         public abstract string ItemId { get; }
         public string PageTitle { get; set; }
-        public string PageSubTitle => getPageSubtitle();
+        public string PageSubtitle => getPageSubtitle();
 
         protected internal virtual string getPageSubtitle()
         {
@@ -117,7 +117,7 @@ namespace Homework4.Pages
             else if (SortOrder.EndsWith("-desc")) sortOrder = name;
             else sortOrder = name + "_desc";
 
-            return $"{page}?sortOrder={sortOrder}&currentFilter={SearchString}";
+            return $"{page}?sortOrder={sortOrder}&currentFilter={SearchString}"+$"&fixedFilter={FixedFilter}&fixedValue={FixedValue}";
         }
 
         protected internal async Task getList(string sortOrder,
