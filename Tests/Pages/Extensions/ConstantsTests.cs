@@ -6,11 +6,8 @@ namespace Homework4.Tests.Pages.Extensions
     [TestClass]
     public class ConstantsTests: BaseTests
     {
-        [TestInitialize]
-        public virtual void TestInitialize()
-        {
-            type = typeof(Constants);
-        }
+        [TestInitialize] public virtual void TestInitialize() => type = typeof(Constants);
+        
 
         [TestMethod] public void UnspecifiedTest() => Assert.AreEqual("Unspecified", Constants.Unspecified);
 
@@ -22,7 +19,7 @@ namespace Homework4.Tests.Pages.Extensions
 
         [TestMethod] public void BusinessMenuTitleTest() => Assert.AreEqual("Business", Constants.BusinessMenuTitle);
         [TestMethod] public void PartiesMenuTitleTest() => Assert.AreEqual("Parties", Constants.PartiesMenuTitle);
-        [TestMethod] public void DataMenuTitle => Assert.AreEqual("Data", Constants.DataMenuTitle);
+        [TestMethod] public void DataMenuTitleTest() => Assert.AreEqual("Data", Constants.DataMenuTitle);
 
         [TestMethod] public void CountriesPageTitleTest() => Assert.AreEqual("Countries", Constants.CountriesPageTitle);
         [TestMethod] public void MeasuresPageTitleTest() => Assert.AreEqual("Measures", Constants.MeasuresPageTitle);
