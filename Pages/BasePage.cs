@@ -60,8 +60,7 @@ namespace Homework4.Pages
             get => db.SortOrder;
             set => db.SortOrder = value;
         } 
-
-        
+       
         public string SearchString
         { 
             get => db.SearchString;
