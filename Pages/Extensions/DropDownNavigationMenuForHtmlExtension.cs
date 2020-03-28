@@ -19,12 +19,11 @@ namespace Homework4.Pages.Extensions
             if (htmlStrings is null) return;
             htmlStrings.Add(new HtmlString("<li class=\"nav-item dropdown\">"));
             htmlStrings.Add(new HtmlString(
-                "<a class=\"nav-link text-dark dropdown-toggle\" href=\"#\" id=\"navbardrop\" db-toggle=\"dropdown\">"));
+                "<a class=\"nav-link text-dark dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">"));
             htmlStrings.Add(new HtmlString(name));
             htmlStrings.Add(new HtmlString("</a>"));
             htmlStrings.Add(new HtmlString("<div class=\"dropdown-menu\">"));
         }
-
         internal static void endDropDownNavigationMenu(List<object> htmlStrings)
         {
             if (htmlStrings is null) return;
@@ -32,13 +31,22 @@ namespace Homework4.Pages.Extensions
             htmlStrings.Add(new HtmlString("</li>"));
         }
 
-        public static IHtmlContent DropDownNavigationMenuFor(this IHtmlHelper helper, string name, params Link[] items)
+        public static IHtmlContent
+            DropDownNavigationMenuFor(this IHtmlHelper helper, string name, params Link[] items)
         {
-            var htmlStrings = new List<object>();
-            beginDropDownNavigationMenu(htmlStrings, name);
-            foreach (var item in items) addDropDownMenuItem(htmlStrings, item);
-            endDropDownNavigationMenu(htmlStrings);
-            return new HtmlContentBuilder(htmlStrings);
+            var strings = htmlStrings(name, items);
+
+            return new HtmlContentBuilder(strings);
+        }
+
+        internal static List<object> htmlStrings(string name, params Link[] items)
+        {
+            var list = new List<object>();
+            beginDropDownNavigationMenu(list, name);
+            foreach (var item in items) addDropDownMenuItem(list, item);
+            endDropDownNavigationMenu(list);
+
+            return list;
         }
     }
 }

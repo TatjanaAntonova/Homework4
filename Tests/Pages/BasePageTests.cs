@@ -65,7 +65,7 @@ namespace Homework4.Tests.Pages
         }
 
         
-        [TestMethod] public void IndexUrl()
+        [TestMethod] public void IndexUrlTest()
         {
             Assert.Inconclusive();
         }

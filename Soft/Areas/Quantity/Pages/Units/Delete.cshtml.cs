@@ -19,9 +19,8 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Units
 
         public async Task<IActionResult> OnPostAsync(string id, string fixedFilter, string fixedValue)
         {
-            FixedFilter = fixedFilter;
-            FixedValue = fixedValue;
             await deleteObject(id, fixedFilter, fixedValue);
+
             return Redirect(IndexUrl);
         }
     }
