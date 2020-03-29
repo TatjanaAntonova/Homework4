@@ -2,7 +2,5 @@
 
 namespace Homework4.Domain.Quantity
 {
-    public interface IMeasuresRepository: IRepository<Measure>
-    {
-    }
+    public interface IMeasuresRepository: IRepository<Measure> { }
 }
