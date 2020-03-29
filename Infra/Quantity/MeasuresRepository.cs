@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Homework4.Data.Quantity;
+﻿using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 
 namespace Homework4.Infra.Quantity

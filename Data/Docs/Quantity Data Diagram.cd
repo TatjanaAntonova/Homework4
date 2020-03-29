@@ -63,25 +63,25 @@
       <FileName>Common\PeriodData.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Homework4.Data.Quantity.UnitTerm">
-    <Position X="4.25" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Quantity\UnitTerm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Homework4.Data.Quantity.MeasureTerm">
-    <Position X="4.25" Y="6" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Quantity\MeasureTerm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Homework4.Data.Quantity.CommonTerm">
+  <Class Name="Homework4.Data.Quantity.CommonTermData">
     <Position X="6.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAACAAAAAAABAAAAAAAAAAA=</HashCode>
-      <FileName>Quantity\CommonTerm.cs</FileName>
+      <FileName>Quantity\CommonTermData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Homework4.Data.Quantity.MeasureTermData" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quantity\MeasureTermData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Homework4.Data.Quantity.UnitTermData" Collapsed="true">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quantity\UnitTermData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

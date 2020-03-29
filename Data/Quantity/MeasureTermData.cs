@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Homework4.Data.Quantity
+﻿namespace Homework4.Data.Quantity
 {
-    public class MeasureTermData: CommonTermData
+    public sealed class MeasureTermData: CommonTermData
     {
     }
 }
