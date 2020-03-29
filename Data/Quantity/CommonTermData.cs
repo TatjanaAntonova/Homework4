@@ -2,7 +2,7 @@
 
 namespace Homework4.Data.Quantity
 {
-    public class CommonTerm: PeriodData
+    public abstract class CommonTermData: PeriodData
     {
         public string MasterId { get; set; }
         public string TermId { get; set; }
