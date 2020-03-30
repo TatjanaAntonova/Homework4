@@ -15,6 +15,6 @@ namespace Homework4.Tests.Facade
         public void IsQuantityTested() { isAllTested(assembly, Namespace("Quantity")); }
 
         [TestMethod]
-        public void IsTested() { isAllTested(assembly, base.Namespace("Facade")); }
+        public void IsTested() { isAllTested(base.Namespace("Facade")); }
     }
 }

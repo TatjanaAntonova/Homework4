@@ -6,7 +6,7 @@ namespace Homework4.Data.Quantity
     {
         public string MasterId { get; set; }
         public string TermId { get; set; }
-        public string Power { get; set; }
+        public int Power { get; set; }
 
     }
 }   
