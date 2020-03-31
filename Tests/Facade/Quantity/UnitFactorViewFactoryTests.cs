@@ -7,12 +7,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Homework4.Tests.Facade.Quantity
 {
     [TestClass]
-    public class MeasureViewFactoryTests : BaseTests
+    public class UnitFactorViewFactoryTests : BaseTests
     {
         [TestInitialize]
         public virtual void TestInitialize()
         {
-            type = typeof(MeasureViewFactory);
+            type = typeof(UnitFactorViewFactory);
         }
 
         [TestMethod] public void CreateTest() { }
@@ -20,19 +20,21 @@ namespace Homework4.Tests.Facade.Quantity
         [TestMethod]
         public void CreateObjectTest()
         {
-            var view = GetRandom.Object<MeasureView>();
-            var data = MeasureViewFactory.Create(view).Data;
+            var view = GetRandom.Object<UnitFactorView>();
+            var data = UnitFactorViewFactory.Create(view).Data;
 
             testArePropertyValuesEqual(view, data);
+
         }
 
         [TestMethod]
         public void CreateViewTest()
         {
-            var data = GetRandom.Object<MeasureData>();
-            var view = MeasureViewFactory.Create(new Measure(data));
+            var data = GetRandom.Object<UnitFactorData>();
+            var view = UnitFactorViewFactory.Create(new UnitFactor(data));
 
             testArePropertyValuesEqual(view, data);
+
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Homework4.Aids;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Homework4.Aids;
 using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
@@ -7,12 +10,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Homework4.Tests.Facade.Quantity
 {
     [TestClass]
-    public class MeasureViewFactoryTests : BaseTests
+    public class UnitTermViewFactoryTests : BaseTests
     {
         [TestInitialize]
         public virtual void TestInitialize()
         {
-            type = typeof(MeasureViewFactory);
+            type = typeof(UnitTermViewFactory);
         }
 
         [TestMethod] public void CreateTest() { }
@@ -20,19 +23,22 @@ namespace Homework4.Tests.Facade.Quantity
         [TestMethod]
         public void CreateObjectTest()
         {
-            var view = GetRandom.Object<MeasureView>();
-            var data = MeasureViewFactory.Create(view).Data;
+            var view = GetRandom.Object<UnitTermView>();
+            var data = UnitTermViewFactory.Create(view).Data;
 
             testArePropertyValuesEqual(view, data);
+
         }
 
         [TestMethod]
         public void CreateViewTest()
         {
-            var data = GetRandom.Object<MeasureData>();
-            var view = MeasureViewFactory.Create(new Measure(data));
+            var data = GetRandom.Object<UnitTermData>();
+            var view = UnitTermViewFactory.Create(new UnitTerm(data));
 
             testArePropertyValuesEqual(view, data);
+
         }
     }
+    
 }
