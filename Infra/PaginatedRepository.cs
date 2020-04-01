@@ -27,11 +27,11 @@ namespace Homework4.Infra
 
         internal int countTotalPages(int count, in int pageSize) => (int)Math.Ceiling(count / (double)pageSize);
 
-        private int getItemsCount() => base.createSqlQuery().CountAsync().Result;
+        internal int getItemsCount() => base.createSqlQuery().CountAsync().Result;
 
         protected internal override IQueryable<TData> createSqlQuery()=> addSkipAndTake(base.createSqlQuery());
 
-        private IQueryable<TData> addSkipAndTake(IQueryable<TData> query)
+        internal IQueryable<TData> addSkipAndTake(IQueryable<TData> query)
         {
             if (PageIndex < 1) return query;
             return query
