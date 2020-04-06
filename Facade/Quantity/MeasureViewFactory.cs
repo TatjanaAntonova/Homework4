@@ -1,4 +1,5 @@
 ﻿using Homework4.Aids;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 
 namespace Homework4.Facade.Quantity
@@ -7,17 +8,17 @@ namespace Homework4.Facade.Quantity
     {
         public static Measure Create(MeasureView v)
         {
-            var o = new Measure();
-            Copy.Members(v, o.Data);
+            var d = new MeasureData();
+            Copy.Members(v, d);
 
-            return o;
+            return new Measure(d);
         }
 
         public static MeasureView Create(Measure o)
         {
             var v = new MeasureView();
-            Copy.Members(o.Data, v);
-
+            if (!(o?.Data is null))
+                Copy.Members(o.Data, v);
             return v;
         }
     }

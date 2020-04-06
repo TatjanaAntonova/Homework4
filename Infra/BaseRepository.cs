@@ -31,7 +31,6 @@ namespace Homework4.Infra
 
         internal List<TDomain> toDomainObjectsList(List<TData> set) => set.Select(toDomainObject).ToList();
         
-
         protected internal abstract TDomain toDomainObject(TData periodData);
 
         internal async Task<List<TData>> runSqlQueryAsync(IQueryable<TData> query) => await query.AsNoTracking().ToListAsync();
@@ -45,16 +44,16 @@ namespace Homework4.Infra
         public async Task<TDomain> Get(string id)
         {
             if (id is null) return new TDomain();
+
             var d = await getData(id);
 
-            var obj = new TDomain {Data = d};
+            var obj = toDomainObject(d);
 
             return obj;
         }
 
         protected abstract Task<TData> getData(string id);
         
-
         protected virtual bool isThisRecord(TData d, string id)
         {
             if (d is UniqueEntityData data) return (d as UniqueEntityData).Id == id;
@@ -64,7 +63,8 @@ namespace Homework4.Infra
         public async Task Delete(string id)
         {
             if (id is null) return;
-            var v = await dbSet.FindAsync(id);
+            var v = await getData(id);
+
             if (v is null) return;
             dbSet.Remove(v);
             await db.SaveChangesAsync();
@@ -80,7 +80,7 @@ namespace Homework4.Infra
         public async Task Update(TDomain obj)
         {
             if (obj is null) return;
-            var v = await dbSet.FindAsync(getId(obj));
+            var v = await getData(getId(obj));
             if (v is null) return;
             dbSet.Remove(v);
             dbSet.Add(obj.Data);

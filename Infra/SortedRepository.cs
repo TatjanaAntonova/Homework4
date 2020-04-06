@@ -6,14 +6,6 @@ using Homework4.Data.Common;
 using Homework4.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
-//if (isDecending(SortOrder))
-//case "ValidFrom":
-//measures = measures.OrderBy(s => s.ValidFrom);
-//break;
-//case "ValidFrom_desc":
-//measures = measures.OrderByDescending(s => s.ValidFrom);
-//break;
-
 namespace Homework4.Infra
 {
     public abstract class SortedRepository<TDomain, TData>: BaseRepository<TDomain, TData>, ISorting
