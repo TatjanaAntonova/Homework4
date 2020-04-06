@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homework4.Soft.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200329144437_initial")]
+    [Migration("20200406105455_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,28 @@ namespace Homework4.Soft.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Measures");
+                });
+
+            modelBuilder.Entity("Homework4.Data.Quantity.MeasureTermData", b =>
+                {
+                    b.Property<string>("MasterId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TermId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Power")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ValidFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ValidTo")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MasterId", "TermId");
+
+                    b.ToTable("MeasureTerms");
                 });
 
             modelBuilder.Entity("Homework4.Data.Quantity.SystemOfUnitsData", b =>
@@ -119,6 +141,28 @@ namespace Homework4.Soft.Migrations
                     b.HasKey("UnitId", "SystemOfUnitsId");
 
                     b.ToTable("UnitFactors");
+                });
+
+            modelBuilder.Entity("Homework4.Data.Quantity.UnitTermData", b =>
+                {
+                    b.Property<string>("MasterId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TermId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Power")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ValidFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ValidTo")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MasterId", "TermId");
+
+                    b.ToTable("UnitTerms");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
