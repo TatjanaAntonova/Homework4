@@ -1,39 +1,72 @@
 ﻿using System;
 using Homework4.Aids;
 using Homework4.Data.Common;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Common;
+using Homework4.Domain.Quantity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 namespace Homework4.Tests.Infra
 {
     [TestClass]
     public abstract class RepositoryTests<TRepository, TObject, TData> : BaseTests
-    where TRepository:IRepository<TObject>
-    where TObject: Entity<TData>
-    where TData: PeriodData, new()
+    where TRepository : IRepository<TObject>
+    where TObject : Entity<TData>
+    where TData : PeriodData, new()
     {
-        private TData data;
+        protected TData data;
         protected TRepository obj;
+        protected DbContext db;
+        protected int count;
+        protected DbSet<TData> dbSet;
 
-        public virtual  void TestInitialize()
+        public virtual void TestInitialize()
         {
             type = typeof(TRepository);
             data = GetRandom.Object<TData>();
+            count = GetRandom.UInt8(20, 40);
+            cleanDbSet();
+            addItems();
         }
+
+        protected void testGetList()
+        {
+            obj.PageIndex = GetRandom.Int32(2, obj.TotalPages - 1);
+            var l = obj.Get().GetAwaiter().GetResult();
+            Assert.AreEqual(obj.PageSize, l.Count);
+        }
+
+        [TestCleanup]
+        public void TestCleanup() => cleanDbSet();
+
+        protected void cleanDbSet()
+        {
+            foreach (var p in dbSet)
+                db.Entry(p).State = EntityState.Deleted;
+            db.SaveChanges();
+        }
+
+        protected void addItems()
+        {
+            for (var i = 0; i < count; i++)
+                obj.Add(getObject(GetRandom.Object<TData>())).GetAwaiter();
+        }
+
         [TestMethod] public void IsSealed() => Assert.IsTrue(type.IsSealed);
 
         [TestMethod] public void IsInherited() => Assert.AreEqual(getBaseType().Name, type?.BaseType?.Name);
-        
+
         protected abstract Type getBaseType();
 
         [TestMethod] public void GetTest() => testGetList();
-        
-        protected abstract void testGetList();
 
         [TestMethod]
         public void GetByIdTest() => AddTest();
 
-        [TestMethod] public void DeleteTest()
+        [TestMethod]
+        public void DeleteTest()
         {
             AddTest();
             var id = getId(data);
@@ -58,7 +91,7 @@ namespace Homework4.Tests.Infra
         }
 
         protected abstract TObject getObject(TData d);
-      
+
 
         [TestMethod]
         public void UpdateTest()
