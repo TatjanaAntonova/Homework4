@@ -2,7 +2,7 @@
 using Homework4.Domain.Quantity;
 using Homework4.Pages.Quantity;
 
-namespace Homework4.Soft.Areas.Quantity.Pages.SystemOfUnits
+namespace Homework4.Soft.Areas.Quantity.Pages.SystemsOfUnits
 {
     public class IndexModel : SystemsOfUnitsPage
     {

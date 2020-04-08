@@ -1,12 +1,13 @@
 ﻿@page
 @using Homework4.Pages.Extensions
-@model Homework4.Soft.Areas.Quantity.Pages.SystemOfUnits.CreateModel
+@model Homework4.Soft.Areas.Quantity.Pages.SystemsOfUnits.EditModel
 
 @{
-    Layout = "_Create";
+    Layout = "_Edit";
 }
+
 <body>
-    @Html.EditControlsFor(model => model.Item.Id)
+    <input type ="hidden" asp-for =" Item.Id" />
     @Html.EditControlsFor(model => model.Item.Code)
     @Html.EditControlsFor(model => model.Item.Name)
     @Html.EditControlsFor(model => model.Item.Definition)

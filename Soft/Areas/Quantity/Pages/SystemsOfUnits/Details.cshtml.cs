@@ -3,7 +3,7 @@ using Homework4.Domain.Quantity;
 using Homework4.Pages.Quantity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Homework4.Soft.Areas.Quantity.Pages.SystemOfUnits
+namespace Homework4.Soft.Areas.Quantity.Pages.SystemsOfUnits
 {
     public class DetailsModel : SystemsOfUnitsPage
     {
