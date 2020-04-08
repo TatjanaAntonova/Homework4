@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homework4.Pages.Quantity
 {
-    public abstract class UnitsPage : BasePage<IUnitsRepository, Unit, UnitView, UnitData>
+    public abstract class UnitsPage : CommonPage<IUnitsRepository, Unit, UnitView, UnitData>
     {
         protected internal UnitsPage(IUnitsRepository r, IMeasuresRepository m) : base(r)
         {
@@ -31,10 +31,10 @@ namespace Homework4.Pages.Quantity
 
         protected internal override string getPageUrl() => "/Quantity/Units";
 
-        protected internal override string getPageSubtitle()
+        protected internal override string getPageSubTitle()
         {
             return FixedValue is null
-                ? base.getPageSubtitle()
+                ? base.getPageSubTitle()
                 : $"For {GetMeasureName(FixedValue)}"; 
         }
 

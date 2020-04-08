@@ -14,5 +14,10 @@ namespace Homework4.Facade.Quantity
         [DisplayName("System of Units")]
         public string SystemOfUnitsId { get; set; }
         public double Factor { get; set; }
+
+        public string GetId()
+        {
+            return $"{SystemOfUnitsId}.{UnitId}";
+        }
     }
 }
