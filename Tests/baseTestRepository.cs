@@ -11,7 +11,7 @@ namespace Homework4.Tests
         where TData : UniqueEntityData, new()
 
     {
-        private readonly List<TObj> list;
+        internal readonly List<TObj> list;
 
         public baseTestRepository()
         {
