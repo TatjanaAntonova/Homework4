@@ -1,12 +1,14 @@
-﻿using Homework4.Data.Quantity;
+﻿using System.Collections.Generic;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homework4.Pages.Quantity
 {
     public class SystemsOfUnitsPage : CommonPage<ISystemsOfUnitsRepository, SystemOfUnits, SystemOfUnitsView, SystemOfUnitsData>
     {
-        protected internal SystemsOfUnitsPage(ISystemsOfUnitsRepository r = null) : base(r)
+        protected internal SystemsOfUnitsPage(ISystemsOfUnitsRepository r) : base(r)
         {
             PageTitle = "Systems of Units";
         }

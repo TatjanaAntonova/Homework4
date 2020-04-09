@@ -75,7 +75,7 @@ namespace Homework4.Tests.Infra {
             var expected = p.Name;
                 if (p.PropertyType != typeof(string))
                     expected += ".ToString()";
-                expected += $".Contains(\"{fixedValue}\")";
+                expected += $" == \"{fixedValue}\"";
                 Assert.IsTrue(s.Contains(expected));
         }
 

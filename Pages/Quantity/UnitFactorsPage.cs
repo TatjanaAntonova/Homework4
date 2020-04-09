@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homework4.Pages.Quantity
 {
     public class UnitFactorsPage : CommonPage<IUnitFactorsRepository, UnitFactor, UnitFactorView, UnitFactorData>
     {
-        protected internal UnitFactorsPage(IUnitFactorsRepository r = null) : base(r)
+        protected internal UnitFactorsPage(IUnitFactorsRepository r) : base(r)
         {
             PageTitle = "Unit Factors";
         }

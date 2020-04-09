@@ -1,15 +1,20 @@
-﻿using Homework4.Data.Quantity;
+﻿using System.Collections.Generic;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homework4.Pages.Quantity
 {
     public class UnitTermsPage : CommonPage<IUnitTermsRepository, UnitTerm, UnitTermView, UnitTermData>
     {
-        protected internal UnitTermsPage(IUnitTermsRepository r = null) : base(r)
+        protected internal UnitTermsPage(IUnitTermsRepository r, IUnitsRepository u) : base(r)
         {
             PageTitle = "Unit Terms";
+            Units = createSelectList<Unit, UnitData>(u);
         }
+
+        public IEnumerable<SelectListItem> Units { get; }
 
         public override string ItemId
         {

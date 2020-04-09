@@ -9,21 +9,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Homework4.Tests.Pages.Quantity
 {
     [TestClass]
-    public class MeasuresPageTests: AbstractClassTests<MeasuresPage, CommonPage<IMeasuresRepository, Measure, MeasureView, MeasureData>>
+    public class MeasuresPageTests: AbstractClassTests<MeasuresPage, 
+        CommonPage<IMeasuresRepository, Measure, MeasureView, MeasureData>>
     {
         private class testClass : MeasuresPage
         {
-            internal testClass(IMeasuresRepository r) : base(r) { }
+            internal testClass(IMeasuresRepository r, IMeasureTermsRepository t) : base(r, t) { }
         }
 
-        private class testRepository : baseTestRepository<Measure, MeasureData>, IMeasuresRepository { }
+        private class testRepository : baseTestRepositoryForUniqueEntity<Measure, MeasureData>, IMeasuresRepository { }
+        private class termRepository : baseTestRepositoryForPeriodEntity<MeasureTerm, MeasureTermData>, IMeasureTermsRepository {
+            protected override bool isThis(MeasureTerm entity, string id)
+            {
+                return true;
+            }
+
+            protected override string getId(MeasureTerm entity)
+            {
+                return string.Empty;
+            }
+        }
 
         [TestInitialize]
         public override void TestInitialize()
         {
             base.TestInitialize();
             var r = new testRepository();
-            obj = new testClass(r);
+            var t = new termRepository();
+            obj = new testClass(r, t);
         }
 
         [TestMethod]
@@ -55,6 +68,19 @@ namespace Homework4.Tests.Pages.Quantity
             var data = GetRandom.Object<MeasureData>();
             var view = obj.toView(new Measure(data));
             testArePropertyValuesEqual(view, data);
+        }
+
+        [TestMethod]
+        public void LoadDetailsTest()
+        {
+            var v = GetRandom.Object<MeasureView>();
+            obj.LoadDetails(v);
+            Assert.IsNotNull(obj.Terms);
+        }
+        [TestMethod]
+        public void TermTest()
+        {
+            isReadOnlyProperty(obj, nameof(obj.Terms), obj.Terms);
         }
     }
 }

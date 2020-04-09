@@ -49,6 +49,7 @@ namespace Homework4.Tests.Pages.Extensions
         [TestMethod] public void RatesPageTitleTest() => Assert.AreEqual("Day Rates", Constants.RatesPageTitle);
         [TestMethod] public void PaymentMethodsPageTitleTest() => Assert.AreEqual("Payment Methods", Constants.PaymentMethodsPageTitle);
         [TestMethod] public void CalculatorPageTitleTest() => Assert.AreEqual("Calculator", Constants.CalculatorPageTitle);
+        [TestMethod] public void SelectLinkTitleTest() => Assert.AreEqual("Select", Constants.SelectLinkTitle);
 
     }
 }
