@@ -31,10 +31,10 @@ namespace Homework4.Infra
             return expression is null? query: query.Where(expression);
         }
 
-        internal Expression<Func<TData, bool>> createFixedWhereExpression()
+        private Expression<Func<TData, bool>> createFixedWhereExpression()
         {
-            if (string.IsNullOrWhiteSpace(FixedValue)) return null;
-            if (string.IsNullOrWhiteSpace(FixedFilter)) return null;
+            if (FixedFilter is null) return null;
+            if (FixedValue is null) return null;
             var param = Expression.Parameter(typeof(TData), "s");
 
             var p = typeof(TData).GetProperty(FixedFilter);
@@ -43,8 +43,10 @@ namespace Homework4.Infra
             Expression body = Expression.Property(param, p);
             if (p.PropertyType != typeof(string))
                 body = Expression.Call(body, "ToString", null);
-            body = Expression.Call(body, "Contains", null, Expression.Constant(FixedValue));
-            var predicate = body ;
+            body = Expression.Equal(
+                body,
+                Expression.Constant(FixedValue));
+            var predicate = body;
 
             return Expression.Lambda<Func<TData, bool>>(predicate, param);
         }

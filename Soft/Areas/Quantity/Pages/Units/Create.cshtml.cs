@@ -8,7 +8,8 @@ namespace Homework4.Soft.Areas.Quantity.Pages.Units
 {
     public class CreateModel : UnitsPage
     {
-        public CreateModel(IUnitsRepository r, IMeasuresRepository m) : base(r, m) { }
+        public CreateModel(IUnitsRepository r, IMeasuresRepository m
+            , IUnitTermsRepository t, IUnitFactorsRepository f): base(r, m, t, f) { }
 
 
         public IActionResult OnGet(string fixedFilter, string fixedValue)

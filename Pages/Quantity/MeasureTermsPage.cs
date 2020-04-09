@@ -1,15 +1,19 @@
-﻿using Homework4.Data.Quantity;
+﻿using System.Collections.Generic;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Homework4.Pages.Quantity
 {
     public class MeasureTermsPage : CommonPage<IMeasureTermsRepository, MeasureTerm, MeasureTermView, MeasureTermData>
     {
-        protected internal MeasureTermsPage(IMeasureTermsRepository r = null) : base(r)
+        protected internal MeasureTermsPage(IMeasureTermsRepository r, IMeasuresRepository m) : base(r)
         {
             PageTitle = "Measure Terms";
+            Measures = createSelectList<Measure, MeasureData>(m);
         }
+        public IEnumerable<SelectListItem> Measures { get; }
 
         public override string ItemId
         {
@@ -31,6 +35,21 @@ namespace Homework4.Pages.Quantity
         protected internal override MeasureTermView toView(MeasureTerm obj)
         {
             return MeasureTermViewFactory.Create(obj);
+        }
+        public string GetMeasureName(string measureId)
+        {
+            foreach (var m in Measures)
+                if (m.Value == measureId)
+                    return m.Text;
+
+            return "Unspecified";
+        }
+
+        protected internal override string getPageSubTitle()
+        {
+            return FixedValue is null
+                ? base.getPageSubTitle()
+                : $"For {GetMeasureName(FixedValue)}";
         }
     }
 }

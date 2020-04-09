@@ -1,4 +1,6 @@
-﻿using Homework4.Data.Quantity;
+﻿using System.Collections.Generic;
+using Homework4.Aids;
+using Homework4.Data.Quantity;
 using Homework4.Domain.Quantity;
 using Homework4.Facade.Quantity;
 
@@ -6,9 +8,12 @@ namespace Homework4.Pages.Quantity
 {
     public abstract class MeasuresPage : CommonPage<IMeasuresRepository, Measure, MeasureView, MeasureData>
     {
-        protected internal MeasuresPage(IMeasuresRepository r = null): base(r)
+        protected internal readonly IMeasureTermsRepository terms;
+        protected internal MeasuresPage(IMeasuresRepository r, IMeasureTermsRepository t) : base(r)
         {
-           PageTitle = "Measures";
+            PageTitle = "Measures";
+            Terms = new List<MeasureTermView>();
+            terms = t;
         }
 
         public override string ItemId => Item?.Id ?? string.Empty;
@@ -23,6 +28,22 @@ namespace Homework4.Pages.Quantity
         protected internal override MeasureView toView(Measure obj)
         {
             return MeasureViewFactory.Create(obj);
+        }
+        public IList<MeasureTermView> Terms { get; }
+
+        public void LoadDetails(MeasureView item)
+        {
+            Terms.Clear();
+
+            if (item is null) return;
+            terms.FixedFilter = GetMember.Name<MeasureTermData>(x => x.MasterId);
+            terms.FixedValue = item.Id;
+            var list = terms.Get().GetAwaiter().GetResult();
+
+            foreach (var e in list)
+            {
+                Terms.Add(MeasureTermViewFactory.Create(e));
+            }
         }
     }
 }
